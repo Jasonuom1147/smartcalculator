@@ -13,7 +13,7 @@ public class SmartCalculator extends javax.swing.JFrame {
      * Creates new form SmarrCalculator
      * 
      */
-        double first;
+    double first;
     double second;
     double total;
     double plusmin;
@@ -27,7 +27,9 @@ public class SmartCalculator extends javax.swing.JFrame {
     int divClick;
     //add click event for modulud
     int modClick;       
-
+    //add binary to decimal convert
+    int decToBinClick;
+    int binToDecClick;
     public SmartCalculator() {
         initComponents();
     }
@@ -62,6 +64,11 @@ public class SmartCalculator extends javax.swing.JFrame {
         multi = new javax.swing.JButton();
         minus = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        display2 = new javax.swing.JTextField();
+        dec = new java.awt.Button();
+        bin = new java.awt.Button();
+        dectobin = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,6 +235,47 @@ public class SmartCalculator extends javax.swing.JFrame {
             }
         });
 
+        display2.setEditable(false);
+        display2.setBackground(new java.awt.Color(102, 102, 102));
+        display2.setForeground(new java.awt.Color(255, 255, 0));
+        display2.setToolTipText("");
+        display2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                display2ActionPerformed(evt);
+            }
+        });
+
+        dec.setLabel("Decimal");
+        dec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decActionPerformed(evt);
+            }
+        });
+
+        bin.setForeground(new java.awt.Color(255, 0, 51));
+        bin.setLabel("Binary");
+        bin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                binActionPerformed(evt);
+            }
+        });
+
+        dectobin.setText("Decimal_to_Binary");
+        dectobin.setActionCommand("decToBin");
+        dectobin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dectobinActionPerformed(evt);
+            }
+        });
+
+        jButton16.setText("Binary_to_Decimal");
+        jButton16.setToolTipText("");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -263,27 +311,44 @@ public class SmartCalculator extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(div, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(multi, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(minus, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(div, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(multi, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(plus, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(minus, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dectobin)
+                                    .addComponent(jButton16)))
                             .addComponent(pone, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(equals1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 144, Short.MAX_VALUE))
-                    .addComponent(display))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(display, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(display2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bin, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(display2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -317,11 +382,13 @@ public class SmartCalculator extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(div)
-                            .addComponent(multi))
+                            .addComponent(multi)
+                            .addComponent(dectobin))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(plus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(minus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(minus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton16))
                         .addGap(18, 18, 18)))
                 .addContainerGap())
         );
@@ -330,13 +397,17 @@ public class SmartCalculator extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -348,84 +419,84 @@ public class SmartCalculator extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton7.getText());//display btn 7 on screen
-     
+        display.setText(display.getText()+jButton7.getText());//display btn 7 on screen
+        display2.setText(display2.getText()+jButton7.getText());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton8.getText()); //dispaly btn 8 on screen
-      
+        display.setText(display.getText()+jButton8.getText()); //dispaly btn 8 on screen
+        display2.setText(display2.getText()+jButton8.getText());  
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton10.getText()); //diplay btn 9 on screen
-      
+        display.setText(display.getText()+jButton10.getText()); //diplay btn 9 on screen
+        display2.setText(display2.getText()+jButton10.getText());
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton4.getText()); //display btn 4 on screen
-        
+        display.setText(display.getText()+jButton4.getText()); //display btn 4 on screen
+        display2.setText(display2.getText()+jButton4.getText());   
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton5.getText()); //display btn 5 on screen
-        
+        display.setText(display.getText()+jButton5.getText()); //display btn 5 on screen
+        display2.setText(display2.getText()+jButton5.getText());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton6.getText()); //display btn 6 on screen
-       
+        display.setText(display.getText()+jButton6.getText()); //display btn 6 on screen
+        display2.setText(display2.getText()+jButton6.getText());     
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton1.getText());  //display btn 1 on screen
-       
+        display.setText(display.getText()+jButton1.getText());  //display btn 1 on screen
+        display2.setText(display2.getText()+jButton1.getText());  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton2.getText()); //display btn 2 on screen
-       
+        display.setText(display.getText()+jButton2.getText()); //display btn 2 on screen
+        display2.setText(display2.getText()+jButton2.getText());   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton3.getText());  //display btn 3 on screen
-      
+        display.setText(display.getText()+jButton3.getText());  //display btn 3 on screen
+        display2.setText(display2.getText()+jButton3.getText()); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + jButton9.getText()); //dispaly btn 0 on screen
-        
+        display.setText(display.getText()+jButton9.getText()); //dispaly btn 0 on screen
+        display2.setText(display2.getText()+jButton9.getText()); 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void dotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dotActionPerformed
         // TODO add your handling code here:
-        display.setText(display.getText() + dot.getText()); //display dot on screen
-        
+        display.setText(display.getText()+dot.getText()); //display dot on screen
+        display2.setText(display2.getText()+dot.getText());   
     }//GEN-LAST:event_dotActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         display.setText(""); //add function clear screen
-    
-        first = 0;
-        second = 0;
+        display2.setText("");
+        first=0;
+        second=0;
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void poneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poneActionPerformed
         // TODO add your handling code here:
-        plusmin = (Double.parseDouble(String.valueOf(display.getText())));//pone button
-        plusmin = plusmin * (-1);
+        plusmin=(Double.parseDouble(String.valueOf(display.getText())));//pone button
+        plusmin=plusmin*(-1);
         display.setText(String.valueOf(plusmin));
-        
+        display2.setText(String.valueOf(plusmin)); 
     }//GEN-LAST:event_poneActionPerformed
 
     private void equals1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equals1ActionPerformed
@@ -477,43 +548,121 @@ public class SmartCalculator extends javax.swing.JFrame {
             second = 0;
             modClick = 0;
         }
+        //decimal to binary convert
+        if(decToBinClick>0){
+            String by = Integer.toBinaryString((int)first);
+            display.setText("="+by);
+            first=0;    //initiallize to 0
+            second=0;   //initiallize to 0
+            decToBinClick=0;
+        }
+        //binary to decimal convert
+        if(binToDecClick>0){
+            total = Integer.parseInt(Integer.toString((int)first),2);
+            display.setText("="+String.valueOf(total));
+            first=0;    //initiallize to 0
+            second=0;   //initiallize to 0
+            binToDecClick=0;
+        }
 
 
     }//GEN-LAST:event_equals1ActionPerformed
 
     private void divActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divActionPerformed
-        first = Double.parseDouble(String.valueOf(display.getText()));
+        first=Double.parseDouble(String.valueOf(display.getText()));
         display.setText("");
-        divClick = 1;
+        display2.setText(display2.getText()+"/");
+        divClick=1;
     }//GEN-LAST:event_divActionPerformed
 
     private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
         // TODO add your handling code here:
-        first = Double.parseDouble(String.valueOf(display.getText()));//performing add between 2 numbers
+        first=Double.parseDouble(String.valueOf(display.getText()));//performing add between 2 numbers
         display.setText("");
-         plusClick = 1;
+        display2.setText(display2.getText()+ "+");
+        plusClick=1;
     }//GEN-LAST:event_plusActionPerformed
 
     private void multiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiActionPerformed
         // TODO add your handling code here:
-        first = Double.parseDouble(String.valueOf(display.getText()));
+        first=Double.parseDouble(String.valueOf(display.getText()));
         display.setText("");
-        multiClick = 1;
+        display2.setText(display2.getText()+"*");
+        multiClick=1;
     }//GEN-LAST:event_multiActionPerformed
 
     private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
         // TODO add your handling code here:
-        first = Double.parseDouble(String.valueOf(display.getText()));
+        first=Double.parseDouble(String.valueOf(display.getText()));
         display.setText("");
-        minusClick = 1;
+        display2.setText(display2.getText()+"-");
+        minusClick=1;
     }//GEN-LAST:event_minusActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-        first = Double.parseDouble(String.valueOf(display.getText()));//modulus button
+        first=Double.parseDouble(String.valueOf(display.getText()));//modulus button
         display.setText("");
-        modClick = 1;
+        display2.setText(display2.getText()+" mod ");
+        modClick=1;
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void display2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_display2ActionPerformed
+
+    private void decActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decActionPerformed
+        // TODO add your handling code here:
+        //decimal button
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
+        jButton4.setVisible(true);
+        jButton5.setVisible(true);
+        jButton6.setVisible(true);
+        jButton7.setVisible(true);
+        jButton8.setVisible(true);
+        jButton10.setVisible(true);
+        div.setVisible(true);
+        multi.setVisible(true);
+        pone.setVisible(true);
+        dectobin.setVisible(true);
+        jButton11.setVisible(true);
+        decimal=true;
+    }//GEN-LAST:event_decActionPerformed
+
+    private void binActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_binActionPerformed
+        // TODO add your handling code here:
+        //binary button
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+        jButton4.setVisible(false);
+        jButton5.setVisible(false);
+        jButton6.setVisible(false);
+        jButton7.setVisible(false);
+        jButton8.setVisible(false);
+        jButton10.setVisible(false);
+        div.setVisible(false);
+        multi.setVisible(false);
+        pone.setVisible(false);
+        dectobin.setVisible(false);
+        jButton11.setVisible(false);
+
+        decimal=false;
+    }//GEN-LAST:event_binActionPerformed
+
+    private void dectobinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dectobinActionPerformed
+        // TODO add your handling code here:
+        first=Double.parseDouble(String.valueOf(display.getText()));//decimal to binary convert
+        display2.setText(display2.getText()+" Converted to binary is (press '=' button)");
+        decToBinClick=1;
+    }//GEN-LAST:event_dectobinActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+        first=Double.parseDouble(String.valueOf(display.getText()));//binary to decimal convert
+        display2.setText(display2.getText()+" Converted to binary is (press '=' button)");
+        binToDecClick=1;
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,7 +706,11 @@ public class SmartCalculator extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button bin;
+    private java.awt.Button dec;
+    private javax.swing.JButton dectobin;
     private javax.swing.JTextField display;
+    private javax.swing.JTextField display2;
     private javax.swing.JButton div;
     private javax.swing.JButton dot;
     private javax.swing.JButton equals1;
@@ -565,6 +718,7 @@ public class SmartCalculator extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
